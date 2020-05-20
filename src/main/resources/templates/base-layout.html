@@ -5,11 +5,11 @@
 
 <body>
 
-<header th:include="fragments/header"></header>
+<header class="bg-dark" th:include="fragments/header"></header>
 
-<main th:include="${view}"></main>
+<main class="pt-2" th:include="${view}"></main>
 
-<footer th:include="fragments/footer"></footer>
+<footer class="bg-dark text-light text-center py-2" th:include="fragments/footer"></footer>
 
 <span th:include="fragments/scripts-bundle"></span>
 
