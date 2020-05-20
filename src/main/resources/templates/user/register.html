@@ -1,45 +1,58 @@
-<main>
-    <div class="container">
-        <div class="card bg-light">
-            <form class="form-horizontal card-body" th:action="@{/register}" method="post">
-                <fieldset>
-                    <legend>Register</legend>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label" for="user_email">Email</label>
-                        <div class="col-sm-4 ">
-                            <input class="form-control" type="email" id="user_email" placeholder="Email" name="email"
+<div class="container">
+    <div class="card bg-light">
+        <form class="form-horizontal" method="post" th:action="@{/register}" th:object="${userForm}">
+            <fieldset>
+                <div class="card-header bg-secondary">
+                    <legend class="text-light">Register</legend>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="form-group col-sm-4">
+                            <label class="control-label" for="user_username">Username</label>
+                            <input class="form-control" id="user_username" name="username" placeholder="Username"
+                                   th:classappend="${#fields.hasErrors('username')}? is-invalid" th:field="*{username}"
+                                   type="text"
                                    required="required"/>
+                            <div class="invalid-feedback" th:errors="*{username}"
+                                 th:if="${#fields.hasErrors('username')}"></div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label" for="user_fullname">Full Name</label>
-                        <div class="col-sm-4 ">
-                            <input class="form-control" type="text" id="user_fullname" placeholder="Full Name"
+                        <div class="form-group col-sm-8">
+                            <label class=" control-label" for="user_fullname">Full Name</label>
+                            <input class="form-control" id="user_fullname" placeholder="Full Name"
+                                   th:classappend="${#fields.hasErrors('fullName')}? is-invalid" th:field="*{fullName}"
+                                   type="text"
                                    name="fullName" required="required"/>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label" for="user_password_first">Password</label>
-                        <div class="col-sm-4">
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label class=" control-label" for="user_password_first">Password</label>
                             <input type="password" class="form-control" id="user_password_first" placeholder="Password"
+                                   th:classappend="${#fields.hasErrors('password')}? is-invalid"
                                    name="password" required="required"/>
+                            <div class="invalid-feedback" th:errors="*{password}"
+                                 th:if="${#fields.hasErrors('password')}"></div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label" for="user_password_second">Confirm Password</label>
-                        <div class="col-sm-4">
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label class=" control-label" for="user_password_second">Confirm Password</label>
                             <input type="password" class="form-control" id="user_password_second" placeholder="Password"
-                                   name="confirmPassword" required="required"/>
+                                   name="passwordConfirm"
+                                   required="required"
+                                   th:classappend="${#fields.hasErrors('passwordConfirm')}? is-invalid"/>
+                            <div class="invalid-feedback" th:errors="*{passwordConfirm}"
+                                 th:if="${#fields.hasErrors('passwordConfirm')}"></div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-4 col-sm-offset-4">
+                        <div class="offset-sm-4 col-sm-4">
                             <a class="btn btn-default" th:href="@{/}">Cancel</a>
                             <input value="Submit" type="submit" class="btn btn-primary"/>
                         </div>
                     </div>
-                </fieldset>
-            </form>
-        </div>
+                </div>
+            </fieldset>
+        </form>
     </div>
-</main>
+</div>

@@ -15,9 +15,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 @Controller
 public class UserController {
@@ -43,9 +45,11 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerProcess(@ModelAttribute("userForm") User userForm, BindingResult bindingResult) {
-
+    public String registerProcess(@Valid @ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
+        userValidator.validate(userForm, bindingResult);
         if (bindingResult.hasErrors()) {
+            System.out.println(bindingResult.getAllErrors());
+            model.addAttribute("view", "user/register");
             return "base-layout";
         }
 
@@ -57,9 +61,9 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login(Model model, String error, String logout) {
+    public String login(Model model, @RequestParam(name = "error", required = false) String error, @RequestParam(name = "logout", required = false) String logout) {
         if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
+            model.addAttribute("error", "Invalid username and/or password.");
 
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
