@@ -1,14 +1,15 @@
 package musec.service;
 
-import musec.entity.Role;
+import musec.DTOs.UserDTO;
+import musec.entity.RolesEnum;
 import musec.entity.User;
 
 import java.util.HashSet;
 
 public interface UserService {
-    void save(User user);
+    void save(UserDTO user);
 
-    void save(User user, HashSet<Role> roles);
+    void save(UserDTO user, HashSet<RolesEnum> roles);
 
     User findByUsername(String username);
 }

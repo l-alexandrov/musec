@@ -5,6 +5,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "posts")
 public class Post {
+    private Integer id;
+    private User author;
+    private String content;
+    private String title;
+
     public Post(String title, String content, User author) {
         this.title = title;
         this.content = content;
@@ -51,9 +56,4 @@ public class Post {
     public void setTitle(String title) {
         this.title = title;
     }
-
-    private Integer id;
-    private User author;
-    private String content;
-    private String title;
 }

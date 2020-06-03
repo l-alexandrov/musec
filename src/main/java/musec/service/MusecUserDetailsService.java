@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class MusecUserDetailsService implements UserDetailsService {
+    private final UserRepository userRepository;
+
     public MusecUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -27,7 +29,7 @@ public class MusecUserDetailsService implements UserDetailsService {
         } else {
             Set<GrantedAuthority> grantedAuthorities = user.getRoles()
                     .stream()
-                    .map(role -> new SimpleGrantedAuthority(role.getName()))
+                    .map(role -> new SimpleGrantedAuthority(role.name()))
                     .collect(Collectors.toSet());
 
             return new org
@@ -38,6 +40,4 @@ public class MusecUserDetailsService implements UserDetailsService {
                     .User(user.getUsername(), user.getPassword(), grantedAuthorities);
         }
     }
-
-    private final UserRepository userRepository;
 }

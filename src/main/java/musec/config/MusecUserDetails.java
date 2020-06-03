@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class MusecUserDetails extends User implements UserDetails {
+    private ArrayList<String> roles;
+    private User user;
 
     public MusecUserDetails(User user, ArrayList<String> roles) {
         super(user.getUsername(), user.getFullName(), user.getPassword());
@@ -48,7 +50,4 @@ public class MusecUserDetails extends User implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
-
-    private ArrayList<String> roles;
-    private User user;
 }

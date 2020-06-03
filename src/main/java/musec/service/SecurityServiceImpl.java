@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SecurityServiceImpl implements SecurityService {
+    private final AuthenticationManager authenticationManager;
+    private final UserDetailsService userDetailsService;
+
     public SecurityServiceImpl(AuthenticationManager authenticationManager, @Qualifier("musecUserDetailsService") UserDetailsService userDetailsService) {
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;
@@ -36,9 +39,4 @@ public class SecurityServiceImpl implements SecurityService {
             SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
         }
     }
-
-
-    private final AuthenticationManager authenticationManager;
-
-    private final UserDetailsService userDetailsService;
 }

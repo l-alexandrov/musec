@@ -14,6 +14,8 @@ import java.util.List;
 @Controller
 public class HomeController {
 
+    final PostRepository postRepository;
+
     public HomeController(PostRepository postRepository) {
         this.postRepository = postRepository;
     }
@@ -29,6 +31,4 @@ public class HomeController {
         model.addAttribute("posts", posts);
         return "base-layout";
     }
-
-    final PostRepository postRepository;
 }
